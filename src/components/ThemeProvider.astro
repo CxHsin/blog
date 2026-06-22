@@ -28,6 +28,17 @@
       return theme ?? 'system'
     }
 
+    function triggerEntranceAnimation() {
+      const root = document.documentElement
+      root.removeAttribute('data-anim-ready')
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          root.setAttribute('data-anim-ready', 'true')
+        })
+      })
+    }
+
     function mountToast(message) {
       if (!message || !document.body) return
 
@@ -47,6 +58,7 @@
     }
 
     applyTheme()
+    triggerEntranceAnimation()
 
     if (!window.__joyeThemeChangeListenerBound) {
       const mediaQuery = window.matchMedia(MEDIA_QUERY)
@@ -67,6 +79,7 @@
     if (!window.__joyeThemePageLoadListenerBound) {
       document.addEventListener('astro:page-load', () => {
         applyTheme()
+        triggerEntranceAnimation()
       })
       window.__joyeThemePageLoadListenerBound = true
     }

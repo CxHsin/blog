@@ -50,7 +50,7 @@ export function buildManifest({ blog, notes }: BuildArgs): FsNode {
         type: 'link',
         name: 'manifest',
         description: 'agent-facing site map (well-known JSON)',
-        href: '/.well-known/joye-manifest.json'
+        href: '/.well-known/cxin-manifest.json'
       }
     ]
   }

@@ -3,8 +3,7 @@
 
 import type { SiteMeta } from 'astro-pure/types'
 import config from '@/site-config'
-import { getLangFromUrl, stripLangPrefix, withLangPrefix } from '@/i18n/ui'
-import { hasEnVersion } from '@/i18n/translations'
+import { getLangFromUrl } from '@/i18n/ui'
 
 type Props = SiteMeta
 
@@ -13,21 +12,8 @@ const { articleDate, description, ogImage, title } = Astro.props
 const siteTitle = `${title} ${config.titleDelimiter} ${config.title}`
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 const socialImageURL = new URL(ogImage ? ogImage : '/og/default.png', Astro.url).href
-
-// Bilingual SEO: per-language og:locale, and hreflang alternates only for pages
-// that exist in both languages (never fabricate an /en URL for zh-only content).
 const lang = getLangFromUrl(Astro.url)
-const barePath = stripLangPrefix(Astro.url.pathname)
-const hasAlt = await hasEnVersion(barePath)
 const ogLocale = lang === 'en' ? 'en_US' : 'zh_CN'
-const ogLocaleAlternate = hasAlt ? (lang === 'en' ? 'zh_CN' : 'en_US') : null
-const hreflangAlternates = hasAlt
-  ? [
-      { hreflang: 'zh-CN', href: new URL(barePath, Astro.site).href },
-      { hreflang: 'en', href: new URL(withLangPrefix(barePath, 'en'), Astro.site).href },
-      { hreflang: 'x-default', href: new URL(barePath, Astro.site).href }
-    ]
-  : []
 ---
 
 <meta charset='utf-8' />
@@ -35,16 +21,13 @@ const hreflangAlternates = hasAlt
 <meta content='IE=edge' http-equiv='X-UA-Compatible' />
 <title>{siteTitle}</title>
 
-{/* Icons / Favicon */}
 <link rel='apple-touch-icon' sizes='180x180' href='/favicon/apple-touch-icon.png' />
 <link rel='icon' type='image/png' sizes='32x32' href='/favicon/favicon-32x32.png' />
 <link rel='icon' type='image/png' sizes='16x16' href='/favicon/favicon-16x16.png' />
 <link rel='manifest' href='/favicon/site.webmanifest' />
 
-{/* Font preloads */}
 <link rel='preload' href='/fonts/Satoshi-Variable.ttf' as='font' type='font/ttf' crossorigin />
 
-{/* JetBrains Mono — terminal / dev mode / mascot */}
 <link rel='preconnect' href='https://fonts.googleapis.com' />
 <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
 <link
@@ -52,32 +35,20 @@ const hreflangAlternates = hasAlt
   href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap'
 />
 
-{/* Canonical URL */}
 <link rel='canonical' href={canonicalURL} />
 
-{/* hreflang alternates — only for pages that exist in both languages */}
-{
-  hreflangAlternates.map((alt) => (
-    <link rel='alternate' hreflang={alt.hreflang} href={alt.href} />
-  ))
-}
-
-{/* Primary Meta Tags */}
 <meta content={siteTitle} name='title' />
 <meta content={description} name='description' />
 <meta content={config.author} name='author' />
 
-{/* Theme Color */}
 <meta content='' name='theme-color' />
 
-{/* Open Graph / Facebook */}
 <meta content={articleDate ? 'article' : 'website'} property='og:type' />
 <meta content={title} property='og:title' />
 <meta content={description} property='og:description' />
 <meta content={canonicalURL} property='og:url' />
 <meta content={config.title} property='og:site_name' />
 <meta content={ogLocale} property='og:locale' />
-{ogLocaleAlternate && <meta content={ogLocaleAlternate} property='og:locale:alternate' />}
 <meta content={socialImageURL} property='og:image' />
 <meta content='1200' property='og:image:width' />
 <meta content='630' property='og:image:height' />
@@ -90,17 +61,14 @@ const hreflangAlternates = hasAlt
   )
 }
 
-{/* Twitter */}
 <meta content='summary_large_image' property='twitter:card' />
 <meta content={canonicalURL} property='twitter:url' />
 <meta content={title} property='twitter:title' />
 <meta content={description} property='twitter:description' />
 <meta content={socialImageURL} property='twitter:image' />
 
-{/* Sitemap */}
 <link href='/sitemap-index.xml' rel='sitemap' />
 
-{/* RSS auto-discovery */}
 <link
   rel='alternate'
   type='application/rss+xml'
@@ -110,8 +78,6 @@ const hreflangAlternates = hasAlt
 
 <meta content={Astro.generator} name='generator' />
 
-{/* Styles */}
 <link rel='stylesheet' href='/styles/global.css' />
 
-{/* View transitions */}
 <!-- <ClientRouter /> -->

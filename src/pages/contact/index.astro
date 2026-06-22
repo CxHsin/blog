@@ -1,58 +1,26 @@
 ---
 import PageLayout from '@/layouts/CommonPage.astro'
-import ContactQR from '@/components/contact/ContactQR.astro'
-import wechat from '@/assets/wechat-contact.jpg'
-import qqGroup from '@/assets/qq-group-contact.jpg'
 
 const headings = [
-  { depth: 2, slug: 'how-to-reach', text: 'How to reach me' },
-  { depth: 2, slug: 'before-you-add', text: 'Before you add me' }
+  { depth: 2, slug: 'contact-way', text: 'Contact' },
+  { depth: 2, slug: 'todo', text: 'To-do' }
 ]
 ---
 
 <PageLayout title='Contact' {headings} info='/contact'>
-  <p>
-    欢迎来聊。技术、求职、博客协作、找朋友闲聊都可以。
-    我会比较慢回，但都会回。
-  </p>
+  <p>This page is now a blank template. The original personal contact details have been removed.</p>
 
-  <h2 id='how-to-reach'>如何联系我</h2>
-  <p>
-    把鼠标移到卡片上即可看到二维码。付费咨询请走微信并备注来意，普通一对一交流和 QQ 群也都在这里。
-  </p>
-  <ContactQR
-    class='my-6'
-    items={[
-      {
-        name: '付费咨询 · 微信',
-        hint: '悬停显示二维码',
-        image: wechat,
-        note: '备注「付费咨询」+ 你的具体需求'
-      },
-      {
-        name: 'cs 交流群（QQ）',
-        hint: '悬停显示二维码',
-        image: qqGroup,
-        note: '群号 831907794 · 入群答题：博客最新一篇文章的标题'
-      }
-    ]}
-  />
-
-  <p>
-    上面的 QQ 群每周会办一次线上交流会，轮流分享技术、求职和 AI 行业的东西。
-    每期聊到的内容和幻灯片，都整理在 <a href='/talks'>分享会</a> 页面里公开沉淀；想参与就扫上面的码进群。
-  </p>
-
-  <h2 id='before-you-add'>加之前请看一下</h2>
+  <h2 id='contact-way'>Contact</h2>
   <ul>
-    <li>
-      <strong>请简单说明来意</strong>。一句话就行，比如「想聊 Agent 开发」「博客求合作」。没有备注的好友请求我大概率不会通过。
-    </li>
-    <li>
-      <strong>商务 / 推广 / 招聘需求</strong>请直接说明背景和合作形式，避免「在吗」式开场。
-    </li>
-    <li>
-      <strong>QQ 群以技术与生活交流为主</strong>，禁止广告、刷屏、外链拉人。违反会被移出。
-    </li>
+    <li><strong>Email</strong>: to be added</li>
+    <li><strong>WeChat / Telegram / other socials</strong>: to be added</li>
+    <li><strong>Preferred contact method</strong>: to be added</li>
+  </ul>
+
+  <h2 id='todo'>To-do</h2>
+  <ul>
+    <li>How people should reach you</li>
+    <li>Whether you accept collaboration, networking, referrals, or project invites</li>
+    <li>What info to include when contacting you, such as intent or project background</li>
   </ul>
 </PageLayout>

@@ -5,7 +5,7 @@ import PageLayout from '@/layouts/BaseLayout.astro'
 import { integ } from '@/site-config'
 
 const meta = {
-  description: 'Search relative posts of the whole blog',
+  description: 'Search blog posts and notes',
   title: 'Search'
 }
 ---
@@ -21,11 +21,11 @@ const meta = {
       {
         integ.pagefind ? (
           <>
-            <p>Enter a search term or phrase to search the blog.</p>
+            <p>Enter a keyword to search the site.</p>
             <PFSearch />
           </>
         ) : (
-          <p>Pagefind is disabled.</p>
+          <p>Search is currently disabled.</p>
         )
       }
     </div>

@@ -39,7 +39,7 @@ const QUERY = `
 `
 
 export const GET: APIRoute = async ({ url }) => {
-  const username = url.searchParams.get('username') ?? 'joyehuang'
+  const username = url.searchParams.get('username') ?? 'CxHsin'
   const token = import.meta.env.GITHUB_TOKEN ?? process.env.GITHUB_TOKEN
 
   if (!token) {
@@ -53,7 +53,7 @@ export const GET: APIRoute = async ({ url }) => {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
-        'User-Agent': 'joyehuang.me'
+        'User-Agent': 'Cxin Blog'
       },
       body: JSON.stringify({ query: QUERY, variables: { login: username } })
     })

@@ -16,8 +16,6 @@ const [blogPosts, notes] = await Promise.all([
   getCollection('archive', ({ data }) => !data.draft)
 ])
 
-// Live total page views from Waline (/api/stats endpoint on the waline server).
-// On a transient failure we render 0 — better than a stale number.
 let pageViews = 0
 const walineServer = config.integ.waline.server
 if (walineServer) {
@@ -30,7 +28,7 @@ if (walineServer) {
       if (typeof data.totalViews === 'number') pageViews = data.totalViews
     }
   } catch {
-    // Network/timeout — leave pageViews at 0.
+    // Keep fallback zero on transient failure.
   }
 }
 
@@ -41,14 +39,14 @@ const labels =
         blog: 'Posts',
         notes: 'Notes',
         projects: 'Projects',
-        pageViews: 'Page views'
+        pageViews: 'Views'
       }
     : {
-        title: '站点统计',
-        blog: '文章',
-        notes: '笔记',
-        projects: '项目',
-        pageViews: '浏览量'
+        title: 'Site stats',
+        blog: 'Posts',
+        notes: 'Notes',
+        projects: 'Projects',
+        pageViews: 'Views'
       }
 
 const items = [

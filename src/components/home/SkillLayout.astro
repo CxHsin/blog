@@ -5,10 +5,10 @@ const { title, skills } = Astro.props
 ---
 
 <div class='skill-section flex flex-col gap-y-2 md:flex-row md:gap-x-5 md:gap-y-0'>
-  <h3 class='skill-title w-1/5 font-medium'>
+  <h3 class='skill-title font-medium text-foreground md:w-1/5 md:pt-1'>
     {title}
   </h3>
-  <div class='skill-container flex flex-row flex-wrap gap-x-4 gap-y-2 md:w-4/5'>
+  <div class='skill-container flex flex-row flex-wrap gap-x-4 gap-y-2 md:flex-1 md:w-4/5'>
     {skills.map((skill: string[], index: number) => (
       <div class='skill-pill' style={`--skill-index:${index}`}>
         <Button as='button' title={skill} style='pill' />
@@ -39,6 +39,9 @@ const { title, skills } = Astro.props
   }
 
   .skill-pill :global(button) {
+    padding-inline: 0.5rem;
+    padding-block: 0.25rem;
+    font-size: 0.875rem;
     transition:
       transform 0.2s ease,
       box-shadow 0.2s ease;

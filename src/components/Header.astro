@@ -2,7 +2,6 @@
 import { getLangFromUrl, localizedPath, useTranslations, type Lang } from '@/i18n/ui'
 
 import { Icon } from 'astro-pure/user'
-import LanguageSwitcher from '@/components/LanguageSwitcher.astro'
 import config from '@/site-config'
 
 interface Props {
@@ -73,12 +72,11 @@ const searchHref = localizedPath('/search', lang)
 
     {/* buttons */}
     <div class='z-30 flex gap-x-4 group-[.not-top]:gap-x-2' style='transition:gap 0.3s'>
-      <LanguageSwitcher lang={lang} />
       <button
         id='toggleDevMode'
         class='group/dev box-content h-5 rounded-md border p-1.5 font-mono text-xs leading-5 tracking-tight text-muted-foreground transition-colors hover:bg-border hover:text-primary sm:group-[.not-top]:rounded-xl'
         aria-label='Enter dev mode'
-        title='dev mode (press `)'
+        title='Dev mode (press ` to open)'
       >
         <span aria-hidden='true'>$_</span>
       </button>
@@ -155,7 +153,7 @@ const searchHref = localizedPath('/search', lang)
       darkModeBtn.addEventListener('click', () => {
         const newTheme = setTheme(undefined, true)
         darkModeBtn.dataset.theme = newTheme
-        showToast({ message: `Set theme to ${newTheme}` })
+        showToast({ message: `Switched to ${newTheme} theme` })
       })
 
       this.querySelector('#toggleDevMode')?.addEventListener('click', () => {

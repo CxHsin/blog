@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-label="Agent Workbench cover">
+  <rect width="1200" height="760" fill="#111820"/>
+  <rect x="88" y="88" width="1024" height="584" rx="22" fill="#f4f4f0"/>
+  <rect x="132" y="138" width="330" height="474" rx="14" fill="#101010" opacity=".08"/>
+  <rect x="504" y="138" width="564" height="120" rx="14" fill="#101010" opacity=".10"/>
+  <rect x="504" y="294" width="270" height="318" rx="14" fill="#101010" opacity=".08"/>
+  <rect x="798" y="294" width="270" height="318" rx="14" fill="#101010" opacity=".08"/>
+  <circle cx="190" cy="196" r="18" fill="#111820"/>
+  <rect x="226" y="184" width="164" height="22" rx="11" fill="#111820"/>
+  <rect x="164" y="274" width="236" height="18" rx="9" fill="#111820" opacity=".58"/>
+  <rect x="164" y="322" width="190" height="18" rx="9" fill="#111820" opacity=".42"/>
+  <rect x="164" y="370" width="252" height="18" rx="9" fill="#111820" opacity=".42"/>
+  <path d="M578 198h416" stroke="#111820" stroke-width="24" stroke-linecap="round"/>
+  <path d="M560 384h150M560 438h180M560 492h120M854 384h126M854 438h160M854 492h98" stroke="#111820" stroke-width="18" stroke-linecap="round" opacity=".72"/>
+</svg>

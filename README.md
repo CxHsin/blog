@@ -1,4 +1,4 @@
-# Joye Huang's Personal Blog
+# Cxin Blog
 
 一个基于 Astro Theme Pure 构建的个人博客网站。
 
@@ -36,7 +36,7 @@ Cursor, Git, Docker, Postman, ESLint/Prettier, Jest
 克隆仓库：
 
 ```shell
-git clone https://github.com/joyehuang/blog.git
+git clone https://github.com/CxHsin/Cxin-Blog.git
 cd blog
 ```
 

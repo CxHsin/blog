@@ -5,8 +5,8 @@ export const prerender = true
 
 export const GET: APIRoute = async () => {
   const png = await defaultOgPng({
-    name: 'Joye Huang',
-    tagline: 'AI Agent & Full-Stack Developer'
+    name: 'Cxin Blog',
+    tagline: 'CxHsin'
   })
   return new Response(new Uint8Array(png), {
     headers: {

@@ -1,193 +1,70 @@
 ---
-import { Button, Icon } from 'astro-pure/user'
+import { Card } from 'astro-pure/user'
 import PageLayout from '@/layouts/CommonPage.astro'
 import GitHubContributions from '@/components/projects/GitHubContributions.astro'
 import ProjectSection from '@/components/projects/ProjectSection.astro'
-import Sponsors from '@/components/projects/Sponsors.astro'
-import Sponsorship from '@/components/projects/Sponsorship.astro'
-import alipay from '@/assets/alipay-qrcode.jpg'
-import wechat from '@/assets/wechat-qrcode.jpg'
 
 const headings = [
   { depth: 2, slug: 'open-source', text: 'Open Source' },
   { depth: 2, slug: 'programs', text: 'Programs' },
   { depth: 2, slug: 'learnings', text: 'Learnings' },
-  { depth: 2, slug: 'theme', text: 'Theme' },
-  { depth: 2, slug: 'sponsorship', text: 'Sponsorship' }
+  { depth: 2, slug: 'theme', text: 'Theme' }
+]
+
+const programs = [
+  {
+    name: 'flow-ai',
+    description: '面向协作式 AI 工作流的系统设计空间，聚焦流程组织、任务编排与多人协作体验。',
+    links: [
+      { type: 'github', href: 'https://github.com/CxHsin/flow-ai' },
+      { type: 'site', href: 'https://ghost-ai-eight-rouge.vercel.app/' }
+    ]
+  },
+  {
+    name: 'jarvis-agent',
+    description: '一个面向个人助手场景的 Agent 项目，探索记忆、工具调用与持续任务执行。',
+    links: [{ type: 'github', href: 'https://github.com/CxHsin/jarvis-agent' }]
+  }
+]
+
+const learnings = [
+  {
+    name: 'CSAPP',
+    description:
+      '围绕《Computer Systems: A Programmer’s Perspective》整理的系统学习笔记与练习记录。',
+    links: [{ type: 'github', href: 'https://github.com/CxHsin/csapp' }]
+  },
+  {
+    name: 'UCB CS61A',
+    description: 'UCB CS61A 课程相关的学习整理，覆盖概念理解、代码练习与阶段性复盘。',
+    links: [{ type: 'github', href: 'https://github.com/CxHsin/CS61A' }]
+  }
+]
+
+const theme = [
+  {
+    name: 'Astro-theme-pure',
+    description: '基于 Astro 的博客主题，强调简洁排版、内容阅读体验与可扩展的个人站点结构。',
+    links: [{ type: 'github', href: 'https://github.com/cworld1/astro-theme-pure' }]
+  }
 ]
 ---
 
 <PageLayout title='Projects' {headings} info={{ slug: '/projects', hideComment: true }}>
   <p>GitHub Activities</p>
-  <GitHubContributions username='joyehuang' />
-  <p>如果你觉得合作一个项目会有趣或有意义，你可以通过捐赠支持我的工作，或者联系我一起讨论项目。</p>
-  <Button title='Checkout sponsorship' class='w-fit' href='#sponsorship'>
-    <Icon class='size-5' name='receive-money' slot='before' />
-  </Button>
+  <GitHubContributions username='CxHsin' displayName='CxHsin' />
 
   <h2 id='open-source'>Open Source</h2>
-  <ProjectSection
-    project={[
-      {
-        name: 'Learn-Open-Harness',
-        description:
-          'OpenHarness 零基础交互式教程 — Agent Loop、Tools、Memory、Multi-Agent。',
-        links: [
-          { type: 'github', href: 'https://github.com/joyehuang/Learn-Open-Harness' }
-        ]
-      },
-      {
-        name: 'minimind-notes',
-        description: '从零构建 LLM — Transformer、Pretraining、SFT 的原理与对照实验。',
-        links: [
-          { type: 'github', href: 'https://github.com/joyehuang/minimind-notes' }
-        ]
-      }
-    ]}
-  />
+  <Card heading='Coming soon' subheading='Open-source projects will be added here later.'>
+    <p class='text-muted-foreground'>This section is intentionally left blank for now.</p>
+  </Card>
 
   <h2 id='programs'>Programs</h2>
-  <ProjectSection
-    project={[
-      {
-        name: 'Atypica',
-        description:
-          'AI消费者研究平台，负责开发Interview Agent进行AI Persona访谈调研。',
-        links: [
-          { type: 'site', href: 'https://atypica.ai' }
-        ]
-      },
-      {
-        name: 'AIXCut',
-        description: 'AI 视频剪辑 Agent，参与设计与工程化落地。',
-        links: [
-          { type: 'site', href: 'https://aixcut.cn/' }
-        ]
-      },
-      {
-        name: 'PrepWise',
-        description:
-          'Prepwise 是我打造的一个AI面试陪练工具，通过语音模拟真实面试，帮你自信开口、即时提升。',
-        links: [
-          { type: 'github', href: 'https://github.com/joyehuang/interview-prep' },
-          { type: 'site', href: 'https://interview-prep-eosin.vercel.app/sign-in' }
-        ]
-      },
-      {
-        name: 'QQ Bot',
-        description:
-          'QQ群打卡机器人，自动管理群内打卡记录和提醒。',
-        links: [
-          { type: 'github', href: 'https://github.com/joyehuang/qq-bot' }
-        ]
-      }
-    ]}
-  />
-  <!--
-  <Collapse title='Some old projects'>
-    <ProjectSection
-      project={[
-        {
-          name: 'Search Switcher',
-          description: 'Add links to each other in search engines',
-          links: [{ type: 'github', href: 'https://github.com/cworld1/search-switcher' }]
-        },
-        {
-          name: 'Pure Baidu',
-          description: 'Baidu search page beautification module',
-          links: [
-            { type: 'doc', href: 'https://cworld0.com/blog/pure-baidu' },
-            { type: 'site', href: 'https://userstyles.org/styles/173673/pure' }
-          ]
-        }
-      ]}
-    />
-  </Collapse>
--->
+  <ProjectSection class='my-2' project={programs} />
+
   <h2 id='learnings'>Learnings</h2>
-  <ProjectSection
-    class='my-2'
-    project={[
-      {
-        name: 'UCB CS61A',
-        description: '我自己学习61a的代码',
-        links: [{ type: 'github', href: 'https://github.com/joyehuang/interview-prep' }]
-      }
-    ]}
-  />
+  <ProjectSection class='my-2' project={learnings} />
 
   <h2 id='theme'>Theme</h2>
-  <ProjectSection
-    project={[
-      {
-        name: '🍭 Astro-theme-pure',
-        description: 'A simple, clean but powerful blog theme build by astro.',
-        links: [
-          { type: 'github', href: 'https://github.com/cworld1/astro-theme-pure' },
-          { type: 'site', href: 'https://github.com/cworld1/astro-theme-pure' },
-          {
-            type: 'doc',
-            href: 'https://github.com/cworld1/astro-theme-pure/blob/main/src/content/blog/customize/index.md'
-          }
-        ]
-      }
-    ]}
-  />
-  <!--
-  <h2 id='others'>Others</h2>
-  <ProjectSection
-    project={[
-      {
-        name: 'CWorld',
-        description: "CWorld's Github",
-        links: [{ type: 'github', href: 'https://github.com/cworld1' }]
-      },
-      {
-        name: 'Arthals',
-        description: 'Arthals Github',
-        links: [{ type: 'github', href: 'https://github.com/zhuozhiyongde' }]
-      }
-    ]}
-  />
--->
-<!--
-  
--->
-  <!-- sponsorship -->
-  <h2 id='sponsorship'>Sponsorship</h2>
-  <p>Please leave a message or contact me proactively after sponsorship.</p>
-  <Sponsorship
-    methods={[
-      { name: 'WeChat', icon: 'wechat-pay', image: wechat },
-      { name: 'Alipay', icon: 'alipay', image: alipay }
-    ]}
-  />
-  <p>Thanks to the following sponsors:</p>
-  <Sponsors
-    sponsors={[
-      { name: '这个是备忘录🤭', amount: '¥25', date: '2026-04-27' },
-      { name: '*烫', amount: '¥9.9', date: '2026-05-18' },
-      { name: '*恒', amount: '¥9.9', date: '2026-06-14' }
-    ]}
-  />
+  <ProjectSection class='my-2' project={theme} />
 </PageLayout>
-
-<style>
-  .sponsorship-card {
-    & .sponsorship-card-img {
-      opacity: 0.3;
-      --un-blur: blur(4px);
-      filter: var(--un-blur);
-    }
-
-    &:hover {
-      & .sponsorship-card-icon {
-        opacity: 0;
-      }
-      & .sponsorship-card-img {
-        opacity: 1;
-        --un-blur: blur(0);
-      }
-    }
-  }
-</style>

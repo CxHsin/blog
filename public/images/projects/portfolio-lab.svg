@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-label="Portfolio Lab cover">
+  <rect width="1200" height="760" fill="#202a31"/>
+  <rect x="100" y="102" width="1000" height="556" rx="28" fill="#f4f4f0"/>
+  <rect x="154" y="158" width="416" height="206" rx="18" fill="#111111"/>
+  <rect x="626" y="158" width="320" height="42" rx="21" fill="#111111"/>
+  <rect x="626" y="238" width="382" height="22" rx="11" fill="#111111" opacity=".6"/>
+  <rect x="626" y="286" width="286" height="22" rx="11" fill="#111111" opacity=".42"/>
+  <rect x="154" y="422" width="254" height="158" rx="18" fill="#111111" opacity=".10"/>
+  <rect x="446" y="422" width="254" height="158" rx="18" fill="#111111" opacity=".10"/>
+  <rect x="738" y="422" width="254" height="158" rx="18" fill="#111111" opacity=".10"/>
+</svg>

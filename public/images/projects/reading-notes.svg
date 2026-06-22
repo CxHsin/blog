@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-label="Reading Notes cover">
+  <rect width="1200" height="760" fill="#f4f4f0"/>
+  <rect x="168" y="104" width="350" height="552" rx="18" fill="#111111"/>
+  <rect x="552" y="104" width="480" height="552" rx="18" fill="#111111" opacity=".08"/>
+  <path d="M226 182h214M226 248h174M226 314h230M226 380h142M226 446h202" stroke="#f4f4f0" stroke-width="22" stroke-linecap="round"/>
+  <path d="M616 190h328M616 260h252M616 330h304M616 400h214M616 470h278" stroke="#111111" stroke-width="20" stroke-linecap="round" opacity=".72"/>
+  <circle cx="940" cy="558" r="42" fill="#111111"/>
+  <path d="M918 558h44M940 536v44" stroke="#f4f4f0" stroke-width="12" stroke-linecap="round"/>
+</svg>

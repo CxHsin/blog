@@ -11,12 +11,18 @@
 }
 .animate {
   opacity: 0;
+  transform: translateY(2rem);
+}
+html[data-anim-ready='true'] .animate {
   animation: 300ms fade-in-up;
   animation-fill-mode: forwards;
 }
 @media (prefers-reduced-motion) {
   .animate {
     opacity: 0;
+    transform: translateY(2rem);
+  }
+  html[data-anim-ready='true'] .animate {
     animation: 100ms fade-in-up;
     animation-fill-mode: forwards;
   }
@@ -213,6 +219,10 @@ span.katex-display {
   --scrollbar-width: 6px;
   --scrollbar-bg: #e0e0e0;
   --scrollbar-thumb-bg: #c0c0c0;
+
+  /* Site root font-size: bumped one step (16px → 18px, +12.5%).
+   * Everything sized in rem scales proportionally. */
+  font-size: 18px;
 }
 html.dark {
   --scrollbar-bg: #2e2e2e;

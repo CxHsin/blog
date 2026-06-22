@@ -26,7 +26,7 @@ import config from './src/site.config.ts'
 // https://astro.build/config
 export default defineConfig({
   // Top-Level Options
-  site: 'https://joyehuang.me',
+  site: 'http://127.0.0.1:4321',
   // base: '/docs',
   trailingSlash: 'never',
 

@@ -1,6 +1,6 @@
 export const languages = {
-  zh: '中',
-  en: 'EN'
+  zh: '中文',
+  en: 'English'
 } as const
 
 export const defaultLang = 'zh' as const
@@ -18,11 +18,10 @@ export const ui = {
     'nav.contact': 'Contact',
     'nav.search': 'Search',
     'nav.toggleMenu': 'Menu',
-    'nav.toggleDarkMode': 'Dark Theme',
-    'nav.toggleLang': '切换语言',
-    'notice.translating':
-      '网站界面已提供英文版，但大部分博客与笔记仍为中文，翻译正在进行中。',
-    'home.title': '首页'
+    'nav.toggleDarkMode': 'Toggle theme',
+    'nav.toggleLang': 'Switch language',
+    'notice.translating': 'This site currently keeps the Chinese interface only.',
+    'home.title': 'Home'
   },
   en: {
     'nav.blog': 'Blog',
@@ -34,10 +33,9 @@ export const ui = {
     'nav.contact': 'Contact',
     'nav.search': 'Search',
     'nav.toggleMenu': 'Menu',
-    'nav.toggleDarkMode': 'Dark Theme',
+    'nav.toggleDarkMode': 'Toggle theme',
     'nav.toggleLang': 'Switch language',
-    'notice.translating':
-      "The site's interface is available in English, but most posts and notes are still in Chinese — translation is a work in progress.",
+    'notice.translating': 'This site currently keeps the Chinese interface only.',
     'home.title': 'Home'
   }
 } as const satisfies Record<Lang, Record<string, string>>
@@ -74,20 +72,10 @@ export function localizedPath(path: string, lang: Lang): string {
   return `/en${path.startsWith('/') ? path : `/${path}`}`
 }
 
-/**
- * Whether a bare (zh-form) path has a real `/en` mirror page.
- *
- * Drives hreflang + og:locale:alternate emission: we only declare an English
- * alternate for pages that genuinely exist in both languages. Chinese-only
- * content — blog posts, archive entries, tag/year indexes — returns false so we
- * never fabricate an `/en/...` URL that 404s and never claim a translation that
- * isn't there. When a post is actually translated later, extend this.
- */
 export function hasEnAlternate(barePath: string): boolean {
   if (barePath === '/') return true
   if (['/about', '/projects', '/links', '/contact', '/search', '/curated'].includes(barePath))
     return true
-  // blog & archive: only the paginated list is mirrored under /en, not detail pages
   if (/^\/blog(\/\d+)?$/.test(barePath)) return true
   if (/^\/archive(\/\d+)?$/.test(barePath)) return true
   return false

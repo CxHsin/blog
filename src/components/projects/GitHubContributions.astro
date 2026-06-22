@@ -11,7 +11,7 @@ interface Props {
   displayName?: string
 }
 
-const { username = 'joyehuang', displayName } = Astro.props
+const { username = 'CxHsin', displayName } = Astro.props
 
 let total = 0
 let contributions: Contribution[] = []
@@ -206,39 +206,23 @@ const formattedTotal = total.toLocaleString('en-US')
     position: relative;
   }
 
-  /* Theme-aware palette: light mode uses the site teal-blue accent (#659EB9),
-     dark mode keeps the monochrome white spotlight from the reference. */
+  /* Default state stays monochrome; hover spotlight restores GitHub green. */
   .gh-contrib-card {
     --gh-gap: 3px;
     --gh-spotlight: 110px;
 
-    --gh-base-empty: #eef1f4;
-    --gh-base-1: #cfe2ec;
-    --gh-base-2: #9bc5d8;
-    --gh-base-3: #6aa6c1;
-    --gh-base-4: #4889a8;
-
-    --gh-bright-empty: #c2cfd7;
-    --gh-bright-1: #5cb0db;
-    --gh-bright-2: #228bc7;
-    --gh-bright-3: #0d6aaa;
-    --gh-bright-4: #064a82;
-    --gh-bright-glow: rgba(13, 106, 170, 0.45);
-  }
-
-  :global(.dark) .gh-contrib-card {
-    --gh-base-empty: rgba(240, 240, 240, 0.06);
+    --gh-base-empty: rgba(255, 255, 255, 0.06);
     --gh-base-1: rgba(240, 240, 240, 0.16);
     --gh-base-2: rgba(240, 240, 240, 0.26);
     --gh-base-3: rgba(240, 240, 240, 0.36);
     --gh-base-4: rgba(240, 240, 240, 0.48);
 
-    --gh-bright-empty: rgba(240, 240, 240, 0.18);
-    --gh-bright-1: rgba(240, 240, 240, 0.55);
-    --gh-bright-2: rgba(240, 240, 240, 0.78);
-    --gh-bright-3: rgba(240, 240, 240, 0.92);
-    --gh-bright-4: rgb(240, 240, 240);
-    --gh-bright-glow: rgba(240, 240, 240, 0.4);
+    --gh-bright-empty: #161b22;
+    --gh-bright-1: #0e4429;
+    --gh-bright-2: #006d32;
+    --gh-bright-3: #26a641;
+    --gh-bright-4: #39d353;
+    --gh-bright-glow: rgba(57, 211, 83, 0.3);
   }
 
   .gh-contrib-grid {

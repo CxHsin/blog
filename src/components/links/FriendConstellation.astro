@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets'
 
-import defaultMeAvatar from '@/assets/avatar.png'
+import defaultMeAvatar from '@/assets/avatar.jpg'
 
 interface Friend {
   name: string
@@ -29,7 +29,7 @@ interface Props {
   meLabel?: string
 }
 
-const { list, meAvatar = defaultMeAvatar, meLabel = 'joyehuang.me' } = Astro.props
+const { list, meAvatar = defaultMeAvatar, meLabel = 'Cxin Blog' } = Astro.props
 const friends = list.link_list
 
 // Phyllotactic spiral (golden-angle + sqrt-radius). Gives roughly uniform

@@ -3,7 +3,7 @@
   flex-wrap: wrap;
   align-items: baseline;
   gap: 8px;
-  margin: 0 0 10px;
+  margin: 0 0 8px;
   padding: 0 4px;
   font-size: 13px;
   line-height: 1.5;
@@ -11,7 +11,7 @@
 }
 .wt-intro-tag {
   font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 11.5px;
+  font-size: 11px;
   letter-spacing: 0.04em;
   color: hsl(var(--muted-foreground) / 0.8);
   padding: 2px 8px;
@@ -21,7 +21,7 @@
 }
 .wt-intro-text code {
   font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 12px;
+  font-size: 11px;
   padding: 1px 6px;
   border-radius: 4px;
   background: hsl(var(--muted) / 0.6);

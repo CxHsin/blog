@@ -1,4 +1,4 @@
-import { SOCIAL_LINKS } from './fs/content'
+﻿import { SOCIAL_LINKS } from './fs/content'
 import { displayPath, getNode, parentOf, prettyPath, resolvePath } from './fs/path'
 import type { DirNode, FsNode } from './fs/types'
 import type {
@@ -18,7 +18,7 @@ type SearchApiResult = {
 
 const MOCK_AGENT_REPLIES: Record<string, string[]> = {
   default: [
-    'Hey, this is Joye (well, a tiny mock of him).',
+    'Hey, this is Cxin (well, a tiny mock of the site owner).',
     'Real agent endpoint is wiring up — for now I just rehearse lines.',
     'Try `chat what are you building?` or `chat hire you?` for canned answers.'
   ],
@@ -95,21 +95,21 @@ export const commands: CommandRegistry = {
 
   whoami: {
     name: 'whoami',
-    summary: 'about Joye',
+    summary: 'about Cxin',
     run: ({ push }) => {
       push([
         {
           kind: 'node',
           node: (
             <span>
-              <span className='wt-tone-primary'>Joye</span>
-              <span className='wt-tone-muted'> · Frontend developer based in Melbourne</span>
+              <span className='wt-tone-primary'>Cxin</span>
+              <span className='wt-tone-muted'> · GitHub: CxHsin</span>
             </span>
           )
         },
-        { kind: 'text', tone: 'muted', text: '  ↳ 2nd-year CS @ University of Melbourne' },
-        { kind: 'text', tone: 'muted', text: '  ↳ AIGC full-stack intern @ Tezign' },
-        { kind: 'text', tone: 'muted', text: '  ↳ stays hungry, stays foolish · plays piano + cello' },
+        { kind: 'text', tone: 'muted', text: '  ↳ GitHub: https://github.com/CxHsin' },
+        { kind: 'text', tone: 'muted', text: '  ↳ Cxin Blog 与个人项目' },
+        { kind: 'text', tone: 'muted', text: '  ↳ builds in public' },
         { kind: 'spacer' },
         { kind: 'text', tone: 'muted', text: 'next: try `ls`, `cat about`, or `cd /blog`' }
       ])
@@ -368,7 +368,7 @@ export const commands: CommandRegistry = {
     summary: 'fetch the agent-facing site map (well-known JSON)',
     usage: 'manifest [--url]',
     run: async ({ args, push }) => {
-      const url = '/.well-known/joye-manifest.json'
+      const url = '/.well-known/cxin-manifest.json'
       // `manifest --url` just prints the public URL (handy for sharing)
       if (args[0] === '--url' || args[0] === '-u') {
         push([
@@ -456,14 +456,14 @@ export const commands: CommandRegistry = {
     name: 'mail',
     summary: 'send me an email',
     run: ({ push }) => {
-      const href = 'mailto:huangdeshiou@gmail.com?subject=hi%20joye'
+      const href = 'mailto:cxin@example.com?subject=hi%20cxin'
       push([
         { kind: 'text', tone: 'muted', text: 'opening your mail client…' },
         {
           kind: 'node',
           node: (
             <a className='wt-link' href={href}>
-              huangdeshiou@gmail.com
+              cxin@example.com
             </a>
           )
         }

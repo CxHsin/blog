@@ -56,7 +56,7 @@ const isLocalDev = import.meta.env.DEV
       const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1))
 
       onIdle(async () => {
-        // @ts-expect-error — Missing types for @pagefind/default-ui package.
+        // @ts-expect-error Missing types for @pagefind/default-ui package.
         const { PagefindUI } = await import('@pagefind/default-ui')
         new PagefindUI({
           element: '#site-search',
@@ -66,9 +66,9 @@ const isLocalDev = import.meta.env.DEV
           showSubResults: true,
           processResult: (result: { url: string; sub_results: Array<{ url: string }> }) => {
             result.url = formatURL(result.url)
-            result.sub_results = result.sub_results.map((sub_result) => {
-              sub_result.url = formatURL(sub_result.url)
-              return sub_result
+            result.sub_results = result.sub_results.map((subResult) => {
+              subResult.url = formatURL(subResult.url)
+              return subResult
             })
           }
         })
@@ -111,8 +111,8 @@ const isLocalDev = import.meta.env.DEV
           renderResults(payload.results)
           status.textContent =
             payload.results.length === 0
-              ? 'No results.'
-              : `${payload.results.length} result${payload.results.length === 1 ? '' : 's'}`
+              ? 'No results found.'
+              : `${payload.results.length} results found`
         } catch (error) {
           if (error instanceof DOMException && error.name === 'AbortError') return
           status.textContent = 'Search failed.'
