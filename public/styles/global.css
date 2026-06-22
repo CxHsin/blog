@@ -222,7 +222,7 @@ span.katex-display {
 
   /* Site root font-size: bumped one step (16px → 18px, +12.5%).
    * Everything sized in rem scales proportionally. */
-  font-size: 18px;
+  font-size: 16px;
 }
 html.dark {
   --scrollbar-bg: #2e2e2e;
