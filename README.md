@@ -1,92 +1,73 @@
 # Cxin Blog
 
-一个基于 Astro Theme Pure 构建的个人博客网站。
+Personal blog built with Astro Theme Pure.
 
-## 关于我
+## About
 
-Frontend Developer | 全栈实习生
+- Owner: `CxHsin`
+- GitHub: [CxHsin](https://github.com/CxHsin)
+- Repository: [CxHsin/blog](https://github.com/CxHsin/blog)
 
-一名正在墨尔本大学学习的大二学生，目标成为一名全栈开发者。目前在上海特赞（Tezign）担任AIGC研发部门全栈实习生。平时喜欢摄影、弹琴与拉大提琴！
+This repository powers a personal blog for posts, project pages, archived notes, and search.
 
-- 🌏 位置：Melbourne, Australia
-- 🎓 学校：墨尔本大学 - 理学学士（计算与软件工程）
-- 💼 当前：上海特赞 Tezign - AIGC研发部门全栈实习生
-- 📧 联系：[LinkedIn](https://www.linkedin.com/in/deshiouhuang/)
+## Tech Stack
 
-## 技术栈
+- Astro
+- React
+- TypeScript
+- Bun
+- Vercel
 
-### 语言
-TypeScript, JavaScript, Python, Java, MySQL
+## Local Development
 
-### 前端
-React, Next.js, Vite
+Requirements:
 
-### 后端
-Vercel, Firebase, Node.js
+- Node.js 18+
+- Bun 1.3+
 
-### 工具
-Cursor, Git, Docker, Postman, ESLint/Prettier, Jest
+Clone the repository:
 
-## 本地开发
-
-环境要求：
-- [Node.js](https://nodejs.org/): 18.0.0+
-- [Bun](https://bun.sh/)（项目统一使用 bun，不要混用 npm）
-
-克隆仓库：
-
-```shell
-git clone https://github.com/CxHsin/Cxin-Blog.git
+```bash
+git clone https://github.com/CxHsin/blog.git
 cd blog
 ```
 
-常用命令：
+Install dependencies:
 
-```shell
-# 安装依赖
+```bash
 bun install
-
-# 启动开发服务器
-bun dev
-
-# 构建项目
-bun run build
-
-# 预览（构建后）
-bun preview
-
-# 创建新文章
-bun new
-
-# 格式化代码
-bun format
-
-# 代码检查
-bun lint
-
-# 一键四连（lint + sync + check + format）
-bun yijiansilian
 ```
 
-## 特性
+Start the dev server:
 
-- ⚡️ 快速且高性能
-- 🎨 简洁的设计
-- 📱 响应式布局
-- 🔍 全站搜索
-- 🗺️ 站点地图和 RSS 订阅
-- 🌐 SEO 友好
-- 📚 文章目录
-- 🖼️ 动态 OG 图片生成
+```bash
+bun run dev
+```
 
-## 主题
+Common commands:
 
-本博客基于 [Astro Theme Pure](https://github.com/cworld1/astro-theme-pure) 主题构建。
+```bash
+bun run build
+bun run preview
+bun run check
+bun run lint
+bun run format
+```
 
-## 许可
+## Deploy
 
-本项目基于 Apache 2.0 协议开源。
+This project is configured for Vercel via `@astrojs/vercel`.
 
----
+Before deploying, make sure:
 
-⭐️ 如果觉得这个项目不错，欢迎 Star！
+- `site` in `astro.config.ts` is set to your production domain
+- `GITHUB_TOKEN` is configured in Vercel environment variables
+
+## Notes
+
+- The repository includes site content and assets that are part of the published blog
+- If you continue the rebrand, it is worth reviewing site copy and post content for leftover legacy identity references
+
+## License
+
+Apache 2.0
