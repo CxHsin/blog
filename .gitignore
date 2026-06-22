@@ -88,3 +88,8 @@ bunfig.toml
 # claude code agent workdir (worktrees, memory, etc.)
 .claude/
 .env*.local
+
+# local debug / scratch files
+.tmp_*
+Blog.tmp_*
+tsconfig.tsbuildinfo

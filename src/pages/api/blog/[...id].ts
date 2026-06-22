@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro'
 import { createMarkdownProcessor } from '@astrojs/markdown-remark'
-import { getEntry } from 'astro:content'
+import { getSafeBlogEntry } from '@/lib/content-guards'
 
 /**
  * Plaintext-ish endpoint consumed by the dev-mode `cat post` viewer.
@@ -31,7 +31,7 @@ function getProcessor() {
 export const GET: APIRoute = async ({ params }) => {
   const id = params.id
   if (!id) return new Response('Not found', { status: 404 })
-  const entry = await getEntry('blog', id)
+  const entry = await getSafeBlogEntry(id)
   if (!entry) return new Response('Not found', { status: 404 })
 
   const raw = (entry as { body?: string }).body ?? ''

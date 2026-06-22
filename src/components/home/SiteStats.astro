@@ -1,9 +1,9 @@
 ---
-import { getCollection } from 'astro:content'
 import config from 'virtual:config'
 
 import Section from './Section.astro'
 import { siteStats } from '@/data/site-stats'
+import { getSafeArchiveCollection, getSafeBlogCollection } from '@/lib/content-guards'
 
 interface Props {
   lang?: 'zh' | 'en'
@@ -12,9 +12,11 @@ interface Props {
 const { lang = 'zh' } = Astro.props as Props
 
 const [blogPosts, notes] = await Promise.all([
-  getCollection('blog', ({ data }) => !data.draft),
-  getCollection('archive', ({ data }) => !data.draft)
+  getSafeBlogCollection(),
+  getSafeArchiveCollection()
 ])
+const publishedBlogPosts = blogPosts.filter((entry) => !entry.data.draft)
+const publishedNotes = notes.filter((entry) => !entry.data.draft)
 
 let pageViews = 0
 const walineServer = config.integ.waline.server
@@ -50,8 +52,8 @@ const labels =
       }
 
 const items = [
-  { label: labels.blog, value: blogPosts.length.toString() },
-  { label: labels.notes, value: notes.length.toString() },
+  { label: labels.blog, value: publishedBlogPosts.length.toString() },
+  { label: labels.notes, value: publishedNotes.length.toString() },
   { label: labels.projects, value: siteStats.projects.toString() },
   { label: labels.pageViews, value: pageViews.toLocaleString() }
 ]

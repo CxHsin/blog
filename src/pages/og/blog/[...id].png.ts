@@ -1,12 +1,12 @@
 import type { APIRoute } from 'astro'
 import type { CollectionEntry } from 'astro:content'
-import { getBlogCollection } from 'astro-pure/server'
 import { postOgPng } from '@/lib/og'
+import { getSafeBlogCollection } from '@/lib/content-guards'
 
 export const prerender = true
 
 export async function getStaticPaths() {
-  const posts = await getBlogCollection()
+  const posts = await getSafeBlogCollection()
   return posts.map((post) => ({
     params: { id: post.id },
     props: { post }

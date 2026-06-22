@@ -3,13 +3,13 @@
  * Archive Tags Index
  * Shows all tags used in the archive with entry counts
  */
-import { getCollection } from 'astro:content'
 import { Button, Icon } from 'astro-pure/user'
 import PageLayout from '@/layouts/BaseLayout.astro'
+import { getSafeArchiveCollection } from '@/lib/content-guards'
 
 export const prerender = true
 
-const allArchives = (await getCollection('archive')).filter((entry) => !entry.data.draft)
+const allArchives = (await getSafeArchiveCollection()).filter((entry) => !entry.data.draft)
 
 // Count entries per tag
 const tagCounts = allArchives.reduce(
