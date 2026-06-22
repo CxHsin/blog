@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro'
-import { getCollection } from 'astro:content'
+import { getSafeArchiveCollection, getSafeBlogCollection } from '@/lib/content-guards'
 
 export const prerender = false
 
@@ -52,11 +52,13 @@ function clampLimit(limit: number) {
 
 async function buildSearchDocs(): Promise<SearchDoc[]> {
   const [blogPosts, archiveEntries] = await Promise.all([
-    getCollection('blog', ({ data }) => !data.draft),
-    getCollection('archive', ({ data }) => !data.draft)
+    getSafeBlogCollection(),
+    getSafeArchiveCollection()
   ])
+  const publishedBlogPosts = blogPosts.filter((entry) => !entry.data.draft)
+  const publishedArchiveEntries = archiveEntries.filter((entry) => !entry.data.draft)
 
-  const blogDocs = blogPosts.map<SearchDoc>((entry) => ({
+  const blogDocs = publishedBlogPosts.map<SearchDoc>((entry) => ({
     collection: 'blog',
     title: entry.data.title,
     description: entry.data.description,
@@ -66,7 +68,7 @@ async function buildSearchDocs(): Promise<SearchDoc[]> {
     body: normalizeBody((entry as { body?: string }).body ?? '')
   }))
 
-  const archiveDocs = archiveEntries.map<SearchDoc>((entry) => ({
+  const archiveDocs = publishedArchiveEntries.map<SearchDoc>((entry) => ({
     collection: 'archive',
     title: entry.data.title,
     description: entry.data.description,

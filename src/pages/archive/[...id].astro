@@ -1,14 +1,14 @@
 ---
 import { render, type CollectionEntry } from 'astro:content'
-import { getCollection } from 'astro:content'
 import PageLayout from '@/layouts/ContentLayout.astro'
 import PageInfo from '@/components/comment/PageInfo.astro'
 import { Button, Icon } from 'astro-pure/user'
+import { getSafeArchiveCollection, getSafeBlogCollection } from '@/lib/content-guards'
 
 export const prerender = true
 
 export async function getStaticPaths() {
-  const archives = await getCollection('archive')
+  const archives = await getSafeArchiveCollection()
   return archives.map((entry) => ({
     params: { id: entry.id },
     props: { entry }
@@ -37,13 +37,13 @@ const {
 
 let relatedBlogPosts: CollectionEntry<'blog'>[] = []
 if (relatedBlog && relatedBlog.length > 0) {
-  const allBlogPosts = await getCollection('blog')
+  const allBlogPosts = await getSafeBlogCollection()
   relatedBlogPosts = allBlogPosts.filter((post) => relatedBlog.includes(post.id))
 }
 
 let relatedArchiveEntries: CollectionEntry<'archive'>[] = []
 if (relatedArchive && relatedArchive.length > 0) {
-  const allArchives = await getCollection('archive')
+  const allArchives = await getSafeArchiveCollection()
   relatedArchiveEntries = allArchives.filter(
     (arch) => relatedArchive.includes(arch.id) && arch.id !== entry.id
   )

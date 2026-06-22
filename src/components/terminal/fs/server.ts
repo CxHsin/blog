@@ -1,8 +1,8 @@
-import { getCollection } from 'astro:content'
 import { sortMDByDate } from 'astro-pure/server'
 
 import { buildManifest, type FsCollectionEntry } from './manifest'
 import type { FsNode } from './types'
+import { getSafeArchiveCollection, getSafeBlogCollection } from '@/lib/content-guards'
 
 /**
  * Server-only entry point for the pseudo-FS. Loads blog + archive
@@ -10,8 +10,8 @@ import type { FsNode } from './types'
  * manifest. Called once per page render from BaseLayout / Terminal.astro.
  */
 export async function buildSiteFs(): Promise<FsNode> {
-  const blog = sortMDByDate(await getCollection('blog')).slice(0, 12).map(toEntry)
-  const archiveRaw = await getCollection('archive').catch(() => [] as unknown[])
+  const blog = sortMDByDate(await getSafeBlogCollection()).slice(0, 12).map(toEntry)
+  const archiveRaw = await getSafeArchiveCollection().catch(() => [] as unknown[])
   // sortMDByDate keys on `publishDate`; archive uses `date`, so we normalize first.
   const notes = (archiveRaw as { id: string; data: Record<string, unknown> }[])
     .map(toEntry)
