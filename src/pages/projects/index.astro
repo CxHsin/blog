@@ -1,5 +1,4 @@
 ---
-import { Card } from 'astro-pure/user'
 import PageLayout from '@/layouts/CommonPage.astro'
 import GitHubContributions from '@/components/projects/GitHubContributions.astro'
 import ProjectSection from '@/components/projects/ProjectSection.astro'
@@ -9,6 +8,14 @@ const headings = [
   { depth: 2, slug: 'programs', text: 'Programs' },
   { depth: 2, slug: 'learnings', text: 'Learnings' },
   { depth: 2, slug: 'theme', text: 'Theme' }
+]
+
+const openSource = [
+  {
+    name: 'Coming soon',
+    description: 'Open-source projects will be added here later.',
+    links: [{ type: 'github', href: 'https://github.com/CxHsin' }]
+  }
 ]
 
 const programs = [
@@ -55,16 +62,14 @@ const theme = [
   <GitHubContributions username='CxHsin' displayName='CxHsin' />
 
   <h2 id='open-source'>Open Source</h2>
-  <Card heading='Coming soon' subheading='Open-source projects will be added here later.'>
-    <p class='text-muted-foreground'>This section is intentionally left blank for now.</p>
-  </Card>
+  <ProjectSection project={openSource} />
 
   <h2 id='programs'>Programs</h2>
-  <ProjectSection class='my-2' project={programs} />
+  <ProjectSection project={programs} />
 
   <h2 id='learnings'>Learnings</h2>
   <ProjectSection class='my-2' project={learnings} />
 
   <h2 id='theme'>Theme</h2>
-  <ProjectSection class='my-2' project={theme} />
+  <ProjectSection project={theme} />
 </PageLayout>
