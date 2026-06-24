@@ -4,7 +4,8 @@ import type { DirNode, FsNode } from './fs/types'
 import type {
   CommandRegistry,
   CompletionContext,
-  OutputLine
+  OutputLine,
+  CommandSpec
 } from './types'
 
 type SearchApiResult = {
@@ -572,6 +573,138 @@ export const commands: CommandRegistry = {
 }
 
 export const commandNames = Object.keys(commands)
+const COMMAND_ALIASES: Record<string, string> = {
+  '?': 'help',
+  cls: 'clear',
+  quit: 'exit',
+  whomi: 'whoami',
+  matirx: 'matrix'
+}
+
+type ParsedInput = {
+  tokens: string[]
+  trailingSpace: boolean
+}
+
+export function parseInput(input: string): ParsedInput {
+  const tokens: string[] = []
+  let current = ''
+  let quote: '"' | "'" | null = null
+  let escape = false
+
+  for (const ch of input) {
+    if (escape) {
+      current += ch
+      escape = false
+      continue
+    }
+
+    if (ch === '\\') {
+      escape = true
+      continue
+    }
+
+    if (quote) {
+      if (ch === quote) {
+        quote = null
+        continue
+      }
+      current += ch
+      continue
+    }
+
+    if (ch === '"' || ch === "'") {
+      quote = ch
+      continue
+    }
+
+    if (/\s/.test(ch)) {
+      if (current) {
+        tokens.push(current)
+        current = ''
+      }
+      continue
+    }
+
+    current += ch
+  }
+
+  if (escape) current += '\\'
+  if (current) tokens.push(current)
+
+  return {
+    tokens,
+    trailingSpace: /\s$/.test(input)
+  }
+}
+
+function levenshtein(a: string, b: string): number {
+  const rows = a.length + 1
+  const cols = b.length + 1
+  const dp = Array.from({ length: rows }, (_, i) =>
+    Array.from({ length: cols }, (_, j) => (i === 0 ? j : j === 0 ? i : 0))
+  )
+
+  for (let i = 1; i < rows; i++) {
+    for (let j = 1; j < cols; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1
+      dp[i][j] = Math.min(
+        dp[i - 1][j] + 1,
+        dp[i][j - 1] + 1,
+        dp[i - 1][j - 1] + cost
+      )
+    }
+  }
+
+  return dp[a.length][b.length]
+}
+
+export function resolveCommand(inputName: string): {
+  spec?: CommandSpec
+  canonical?: string
+  suggestion?: string
+} {
+  const name = inputName.toLowerCase()
+  const canonical = COMMAND_ALIASES[name] ?? name
+  const spec = commands[canonical]
+  if (spec) return { spec, canonical }
+
+  const visible = commandNames.filter((cmd) => !commands[cmd].hidden)
+  const suggestion =
+    visible.find((cmd) => cmd.startsWith(name)) ??
+    visible
+      .map((cmd) => ({ cmd, dist: levenshtein(name, cmd) }))
+      .sort((a, b) => a.dist - b.dist)[0]?.cmd
+
+  if (!suggestion) return {}
+  const distance = levenshtein(name, suggestion)
+  return distance <= 2 || suggestion.startsWith(name) ? { suggestion } : {}
+}
+
+export function commandNotFoundLines(name: string): OutputLine[] {
+  const resolved = resolveCommand(name)
+  const lines: OutputLine[] = [{ kind: 'text', tone: 'err', text: `command not found: ${name}` }]
+  if (resolved.suggestion) {
+    lines.push({
+      kind: 'text',
+      tone: 'muted',
+      text: `did you mean \`${resolved.suggestion}\`?`
+    })
+    return lines
+  }
+  lines.push({ kind: 'text', tone: 'muted', text: 'try `help` for a list' })
+  return lines
+}
+
+function commandPathHint(input: string): OutputLine | null {
+  const resolved = resolveCommand(input)
+  if (!resolved.spec || !resolved.canonical) return null
+  return {
+    kind: 'text',
+    tone: 'muted',
+    text: `tip: \`${input}\` is a command. try \`${resolved.canonical}\` instead of using it as a path.`
+  }
+}
 
 /**
  * Path completion helper. Splits the partial token into a base directory
@@ -628,9 +761,10 @@ export function completeInput(
   input: string,
   ctx: CompletionContext
 ): string | string[] | null {
-  const hasSpace = /\s/.test(input)
-  if (!hasSpace) {
-    const head = input.trimStart()
+  const { tokens, trailingSpace } = parseInput(input)
+
+  if (tokens.length <= 1 && !trailingSpace) {
+    const head = tokens[0] ?? ''
     const candidates = commandNames.filter(
       (n) => n.startsWith(head) && !commands[n].hidden
     )
@@ -641,11 +775,10 @@ export function completeInput(
     return candidates
   }
 
-  const tokens = input.split(/\s+/)
   const cmd = tokens[0].toLowerCase()
   const spec = commands[cmd]
   if (!spec || !spec.complete) return null
-  const argTokens = tokens.slice(1)
+  const argTokens = trailingSpace ? [...tokens.slice(1), ''] : tokens.slice(1)
   const partial = argTokens[argTokens.length - 1] ?? ''
   const all = spec.complete(argTokens, ctx)
   const matches = all.filter((c) => c.startsWith(partial))
