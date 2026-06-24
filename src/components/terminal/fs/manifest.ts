@@ -133,13 +133,11 @@ function buildPostDir(p: FsCollectionEntry, hrefRoot: string): DirNode {
 
 /**
  * Best-effort language guess for a post: explicit `data.language` wins,
- * else look for an `/en/` segment in the entry id (i18n convention used
- * by content collection — `<slug>/en/post.mdx`), else default to zh.
+ * else default to zh.
  */
 function inferLang(p: FsCollectionEntry): string {
   const explicit = (p.data as { language?: string }).language
   if (explicit) return explicit
-  if (/(^|\/)en\//.test(p.id)) return 'en'
   return 'zh'
 }
 

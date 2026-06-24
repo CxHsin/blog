@@ -1,5 +1,4 @@
 ---
-import type { Lang } from '@/i18n/ui'
 import {
   curatedTypeLabels,
   getCuratedDigestHref,
@@ -10,25 +9,19 @@ import {
 interface Props {
   item: CuratedEntry
   variant?: 'compact' | 'full'
-  lang?: Lang
 }
 
-const { item, variant = 'full', lang = 'zh' } = Astro.props
+const { item, variant = 'full' } = Astro.props
 const isCompact = variant === 'compact'
 
 const labels = {
-  zh: {
-    note: '笔记'
-  },
-  en: {
-    note: 'Note'
-  }
-} as const
+  note: '笔记'
+}
 
 const digestHref = getCuratedDigestHref(item)
 const sourceHost = getCuratedSourceHost(item.data.source)
 const sourceLabel = item.data.sourceAuthor || sourceHost
-const typeLabel = curatedTypeLabels[lang][item.data.type]
+const typeLabel = curatedTypeLabels.zh[item.data.type]
 const recommendation = item.data.why || item.data.description
 ---
 
@@ -68,7 +61,7 @@ const recommendation = item.data.why || item.data.description
               class='shrink-0 opacity-70 hover:text-primary hover:opacity-100'
               data-astro-prefetch
             >
-              {labels[lang].note}
+              {labels.note}
             </a>
           </>
         )
@@ -99,7 +92,6 @@ const recommendation = item.data.why || item.data.description
           </p>
         )
       }
-      {/* Notes are intentionally kept in the tiny metadata row. */}
     </div>
   </article>
 </li>

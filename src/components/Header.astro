@@ -1,14 +1,10 @@
 ---
-import { getLangFromUrl, localizedPath, useTranslations, type Lang } from '@/i18n/ui'
+import { localizedPath, useTranslations } from '@/i18n/ui'
 
 import { Icon } from 'astro-pure/user'
 import config from '@/site-config'
 
-interface Props {
-  lang?: Lang
-}
-
-const lang = (Astro.props.lang ?? getLangFromUrl(Astro.url)) as Lang
+const lang = 'zh'
 const t = useTranslations(lang)
 
 const menuKeyMap: Record<string, Parameters<typeof t>[0]> = {

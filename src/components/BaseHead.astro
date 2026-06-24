@@ -3,7 +3,6 @@
 
 import type { SiteMeta } from 'astro-pure/types'
 import config from '@/site-config'
-import { getLangFromUrl } from '@/i18n/ui'
 
 type Props = SiteMeta
 
@@ -12,8 +11,7 @@ const { articleDate, description, ogImage, title } = Astro.props
 const siteTitle = `${title} ${config.titleDelimiter} ${config.title}`
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 const socialImageURL = new URL(ogImage ? ogImage : '/og/default.png', Astro.url).href
-const lang = getLangFromUrl(Astro.url)
-const ogLocale = lang === 'en' ? 'en_US' : 'zh_CN'
+const ogLocale = 'zh_CN'
 ---
 
 <meta charset='utf-8' />
