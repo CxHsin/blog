@@ -5,12 +5,6 @@ import Section from './Section.astro'
 import { siteStats } from '@/data/site-stats'
 import { getSafeArchiveCollection, getSafeBlogCollection } from '@/lib/content-guards'
 
-interface Props {
-  lang?: 'zh' | 'en'
-}
-
-const { lang = 'zh' } = Astro.props as Props
-
 const [blogPosts, notes] = await Promise.all([
   getSafeBlogCollection(),
   getSafeArchiveCollection()
@@ -34,22 +28,13 @@ if (walineServer) {
   }
 }
 
-const labels =
-  lang === 'en'
-    ? {
-        title: 'Site stats',
-        blog: 'Posts',
-        notes: 'Notes',
-        projects: 'Projects',
-        pageViews: 'Views'
-      }
-    : {
-        title: 'Site stats',
-        blog: 'Posts',
-        notes: 'Notes',
-        projects: 'Projects',
-        pageViews: 'Views'
-      }
+const labels = {
+  title: 'Site stats',
+  blog: 'Posts',
+  notes: 'Notes',
+  projects: 'Projects',
+  pageViews: 'Views'
+}
 
 const items = [
   { label: labels.blog, value: publishedBlogPosts.length.toString() },

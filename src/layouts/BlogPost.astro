@@ -9,17 +9,15 @@ import { MediumZoom } from 'astro-pure/advanced'
 import { ArticleBottom, Copyright, Hero, TOC } from 'astro-pure/components/pages'
 import PageLayout from '@/layouts/ContentLayout.astro'
 import Comment from '@/components/comment/Comment.astro'
-import HeroEn from '@/components/HeroEn.astro'
 import { integ } from '@/site-config'
 
 interface Props {
-  post: CollectionEntry<'blog' | 'blogEn'>
-  posts: CollectionEntry<'blog' | 'blogEn'>[]
+  post: CollectionEntry<'blog'>
+  posts: CollectionEntry<'blog'>[]
   headings: MarkdownHeading[]
   remarkPluginFrontmatter: Record<string, unknown>
   back?: string
   recommend?: boolean
-  enHero?: boolean
 }
 
 const {
@@ -28,8 +26,7 @@ const {
   headings,
   remarkPluginFrontmatter,
   back = '/blog',
-  recommend = true,
-  enHero = false
+  recommend = true
 } = Astro.props
 
 const {
@@ -52,13 +49,7 @@ const primaryColor = data.heroImage?.color ?? 'hsl(var(--primary) / var(--un-tex
 >
   {!!headings.length && <TOC {headings} slot='sidebar' />}
 
-  {
-    enHero ? (
-      <HeroEn {data} {remarkPluginFrontmatter} slot='header' />
-    ) : (
-      <Hero {data} {remarkPluginFrontmatter} slot='header' />
-    )
-  }
+  <Hero {data} {remarkPluginFrontmatter} slot='header' />
 
   <slot />
 
