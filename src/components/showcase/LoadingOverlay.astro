@@ -1,0 +1,45 @@
+---
+import '@/assets/styles/loading-overlay.css'
+
+export interface LoadingOverlayProps {
+  brand: string
+  subtitle: string
+  durationMs?: number
+  background?: string
+}
+
+const {
+  brand,
+  subtitle,
+  durationMs = 2200,
+  background = '#050505'
+} = Astro.props
+
+const config = {
+  durationMs
+}
+---
+
+<div class='loading-overlay-shell' style={`--loading-background:${background};`}>
+  <div class='loading-overlay' data-loading-overlay>
+    <div class='loading-overlay__content'>
+      <h1 class='loading-overlay__title'>{brand}</h1>
+      <p class='loading-overlay__subtitle'>
+        {subtitle}
+        <span class='loading-overlay__dots' aria-hidden='true'></span>
+      </p>
+    </div>
+
+    <div class='loading-overlay__progress-track' aria-hidden='true'>
+      <div class='loading-overlay__progress-fill' data-loading-progress></div>
+    </div>
+  </div>
+
+  <script
+    type='application/json'
+    data-loading-config
+    is:inline
+    set:html={JSON.stringify(config)}
+  ></script>
+  <script is:inline src='/scripts/loading-overlay.js'></script>
+</div>
