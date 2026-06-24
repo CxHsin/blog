@@ -9,6 +9,7 @@ Personal blog built with Astro Theme Pure.
 - Repository: [CxHsin/blog](https://github.com/CxHsin/blog)
 
 This repository powers a personal blog for posts, project pages, archived notes, and search.
+It is adapted from [joyehuang/blog](https://github.com/joyehuang/blog) with project-specific customizations.
 
 ## Tech Stack
 
