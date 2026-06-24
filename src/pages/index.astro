@@ -4,10 +4,11 @@ import avatar from 'src/assets/avatar.jpg'
 
 import { Quote } from 'astro-pure/advanced'
 import { Button, Card, Icon, Label } from 'astro-pure/user'
-import PageLayout from '@/layouts/BaseLayout.astro'
 import Section from '@/components/home/Section.astro'
 import SkillLayout from '@/components/home/SkillLayout.astro'
+import LoadingOverlay from '@/components/showcase/LoadingOverlay.astro'
 import Terminal from '@/components/terminal/Terminal.astro'
+import PageLayout from '@/layouts/BaseLayout.astro'
 import config from '@/site-config'
 
 export const prerender = true
@@ -17,10 +18,11 @@ const frontend = ['React', 'Next.js', 'Tailwind CSS', 'Vite']
 const backend = ['Node.js', 'Supabase', 'Vercel', 'PostgreSQL']
 const ai = ['LLM', 'Agent', 'RAG', 'Prompt Engineering']
 const tools = ['Git', 'Docker', 'Bun', 'Figma']
-
 ---
 
 <PageLayout meta={{ title: 'Home' }} highlightColor='#659EB9'>
+  <LoadingOverlay brand='CXIN' subtitle='Connecting Scroll Effects' durationMs={2200} />
+
   <main class='flex w-full flex-col items-center'>
     <section class='animate relative z-50 mb-12 flex flex-col items-center gap-y-6' id='content-header'>
       <Image

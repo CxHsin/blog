@@ -1,0 +1,128 @@
+.loading-overlay-shell {
+  --loading-background: #050505;
+  --loading-foreground: #fff;
+  --loading-muted: rgba(255, 255, 255, 0.62);
+  --loading-track: rgba(255, 255, 255, 0.12);
+  --loading-shadow: rgba(255, 255, 255, 0.34);
+}
+
+body.loading-overlay-is-locked {
+  touch-action: none;
+}
+
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.08), transparent 28%),
+    linear-gradient(180deg, #080808, var(--loading-background));
+  color: var(--loading-foreground);
+  transition:
+    opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+    visibility 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.loading-overlay.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loading-overlay__content {
+  padding: 2rem;
+  text-align: center;
+}
+
+.loading-overlay__title {
+  margin: 0 0 1rem;
+  font-family: 'Satoshi', system-ui, sans-serif;
+  font-size: clamp(3rem, 10vw, 7rem);
+  font-weight: 900;
+  letter-spacing: 0.5rem;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #fff, #767676);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: loading-overlay-pulse 2s infinite alternate ease-in-out;
+}
+
+.loading-overlay__subtitle {
+  color: var(--loading-muted);
+  font-family:
+    'IBM Plex Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.92rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.loading-overlay__dots::after {
+  content: '';
+  animation: loading-overlay-ellipsis 1.5s infinite steps(4);
+}
+
+.loading-overlay__progress-track {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 4px;
+  background-color: var(--loading-track);
+}
+
+.loading-overlay__progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 1));
+}
+
+@keyframes loading-overlay-pulse {
+  0% {
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.18));
+    opacity: 0.78;
+  }
+  100% {
+    filter: drop-shadow(0 0 30px var(--loading-shadow));
+    opacity: 1;
+  }
+}
+
+@keyframes loading-overlay-ellipsis {
+  0% {
+    content: '';
+  }
+  25% {
+    content: '.';
+  }
+  50% {
+    content: '..';
+  }
+  75% {
+    content: '...';
+  }
+  100% {
+    content: '';
+  }
+}
+
+@media (max-width: 640px) {
+  .loading-overlay__title {
+    letter-spacing: 0.28rem;
+  }
+
+  .loading-overlay__subtitle {
+    letter-spacing: 0.16em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-overlay {
+    transition-duration: 0.01ms;
+  }
+
+  .loading-overlay__title,
+  .loading-overlay__dots::after {
+    animation: none;
+  }
+}
