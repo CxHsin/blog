@@ -3,24 +3,39 @@ import { Button, Card } from 'astro-pure/user'
 import PageLayout from '@/layouts/CommonPage.astro'
 
 const headings = [
-  { depth: 2, slug: 'overview', text: 'Overview' },
-  { depth: 2, slug: 'todo', text: 'To-do' }
+  { depth: 2, slug: 'intro', text: 'Introduction' },
+  { depth: 2, slug: 'focus', text: 'Focus' },
+  { depth: 2, slug: 'now', text: 'Now' }
 ]
 ---
 
 <PageLayout title='About' {headings} info='/about'>
-  <h2 id='overview'>Overview</h2>
-  <p>This page is now a blank template. Personal profile details from the original site have been removed.</p>
-  <p>Use this space for a short introduction, your current focus, background, and anything else you want visitors to know.</p>
-  <Button title='View contact page' class='w-fit' href='/contact' style='ahead' />
+  <h2 id='intro'>AI Agent &amp; Full-Stack Developer</h2>
+  <p>
+    本科在读，正在寻找 agent 相关实习，也持续把兴趣放在 AI 应用、Agent workflow 和全栈产品实现上。
+    我喜欢把想法快速做成能运行的东西，再一边上线、一边打磨，把抽象概念变成真实可用的产品体验。
+  </p>
+  <p>
+    最近尤其关注两类问题：一类是 LLM 与 agent 系统底层到底如何工作，包含 context、memory、tool
+    use、retrieval 和 multi-agent collaboration；另一类是这些能力怎样真正落到产品里，变成用户愿意持续使用的功能，而不只是 demo。
+  </p>
 
-  <h2 id='todo'>To-do</h2>
-  <Card heading='Fill this section later' subheading='Suggested placeholders for your own content.'>
+  <h2 id='focus'>Focus</h2>
+  <Card heading='What I am working on' subheading='Build fast, learn faster.'>
     <ul class='ms-4 list-disc text-muted-foreground'>
-      <li>Short self introduction</li>
-      <li>School / company / city</li>
-      <li>Current focus</li>
-      <li>Experience summary</li>
+      <li>AI Agent 产品原型与工作流设计</li>
+      <li>基于 LLM 的全栈应用开发与交互落地</li>
+      <li>从 prompt 到 memory、tool calling、multi-agent 的系统化理解</li>
+      <li>把研究兴趣转成真正能跑起来的产品与内容</li>
     </ul>
   </Card>
+
+  <h2 id='now'>Now</h2>
+  <p>
+    如果你也在做 agent、AI product 或者自动化方向的事情，欢迎联系我。无论是实习机会、项目合作，还是单纯交流想法，我都很愿意聊聊。
+  </p>
+  <p>
+    除了写代码，我平时也会弹琴、拍照，偶尔把做项目时想明白的一些东西写成文章留在博客里。
+  </p>
+  <Button title='View contact page' class='w-fit' href='/contact' style='ahead' />
 </PageLayout>
