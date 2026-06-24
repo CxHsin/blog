@@ -6,40 +6,54 @@ export interface LoadingOverlayProps {
   subtitle: string
   durationMs?: number
   background?: string
+  oncePerSite?: boolean
+  storageKey?: string
 }
 
 const {
   brand,
   subtitle,
   durationMs = 2200,
-  background = '#050505'
+  background = '#050505',
+  oncePerSite = false,
+  storageKey
 } = Astro.props
 
+const resolvedStorageKey = storageKey ?? 'loading-overlay-seen'
+
 const config = {
-  durationMs
+  durationMs,
+  oncePerSite,
+  storageKey: resolvedStorageKey
 }
 ---
 
-<div class='loading-overlay-shell' style={`--loading-background:${background};`}>
-  <div class='loading-overlay' data-loading-overlay>
-    <div class='loading-overlay__content'>
-      <h1 class='loading-overlay__title'>{brand}</h1>
-      <p class='loading-overlay__subtitle'>
-        {subtitle}
-        <span class='loading-overlay__dots' aria-hidden='true'></span>
-      </p>
-    </div>
+<template
+  data-loading-overlay-template
+  data-loading-storage-key={resolvedStorageKey}
+  data-loading-background={background}
+>
+  <div class='loading-overlay-shell'>
+    <div class='loading-overlay' data-loading-overlay>
+      <div class='loading-overlay__content'>
+        <h1 class='loading-overlay__title'>{brand}</h1>
+        <p class='loading-overlay__subtitle'>
+          {subtitle}
+          <span class='loading-overlay__dots' aria-hidden='true'></span>
+        </p>
+      </div>
 
-    <div class='loading-overlay__progress-track' aria-hidden='true'>
-      <div class='loading-overlay__progress-fill' data-loading-progress></div>
+      <div class='loading-overlay__progress-track' aria-hidden='true'>
+        <div class='loading-overlay__progress-fill' data-loading-progress></div>
+      </div>
     </div>
   </div>
+</template>
 
-  <script
-    type='application/json'
-    data-loading-config
-    is:inline
-    set:html={JSON.stringify(config)}
-  ></script>
-  <script is:inline src='/scripts/loading-overlay.js'></script>
-</div>
+<script
+  type='application/json'
+  data-loading-config
+  is:inline
+  set:html={JSON.stringify(config)}
+></script>
+<script is:inline src='/scripts/loading-overlay.js'></script>

@@ -21,7 +21,13 @@ const tools = ['Cursor', 'Git', 'Docker', 'Bun', 'Figma', 'ESLint/Prettier']
 ---
 
 <PageLayout meta={{ title: 'Home' }} highlightColor='#659EB9'>
-  <LoadingOverlay brand='CXIN' subtitle='Connecting Scroll Effects' durationMs={2200} />
+  <LoadingOverlay
+    brand='CXIN'
+    subtitle='Connecting Scroll Effects'
+    durationMs={2200}
+    oncePerSite={true}
+    storageKey='site-loading-overlay-seen'
+  />
 
   <main class='flex w-full flex-col items-center'>
     <section class='animate relative z-50 mb-12 flex flex-col items-center gap-y-6' id='content-header'>
