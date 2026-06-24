@@ -493,7 +493,6 @@ const currentPath = Astro.url.pathname
 
   header-component.not-top .header-brand:hover,
   header-component.not-top .header-brand:focus-visible,
-  header-component.not-top .header-link[aria-current='page'],
   header-component.not-top .header-link:hover,
   header-component.not-top .header-link:focus-visible,
   header-component.not-top .header-icon-link:hover,
@@ -501,16 +500,15 @@ const currentPath = Astro.url.pathname
   header-component.not-top .header-action:hover,
   header-component.not-top .header-action:focus-visible {
     background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.04)),
-      linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01));
-    border-color: rgba(255, 255, 255, 0.08);
+      linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03)),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+    border-color: rgba(255, 255, 255, 0.05);
     box-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.14) inset,
-      0 -1px 0 rgba(0, 0, 0, 0.12) inset,
-      0 10px 18px rgba(10, 14, 24, 0.18),
-      0 2px 0 rgba(255, 255, 255, 0.03);
+      0 1px 0 rgba(255, 255, 255, 0.1) inset,
+      0 -1px 0 rgba(0, 0, 0, 0.08) inset,
+      0 6px 14px rgba(10, 14, 24, 0.12);
     transform: translateY(-1px);
-    filter: saturate(1.08);
+    filter: saturate(1.03);
   }
 
   .header-action:hover,
@@ -532,7 +530,6 @@ const currentPath = Astro.url.pathname
 
   :global(.dark) header-component.not-top .header-brand:hover,
   :global(.dark) header-component.not-top .header-brand:focus-visible,
-  :global(.dark) header-component.not-top .header-link[aria-current='page'],
   :global(.dark) header-component.not-top .header-link:hover,
   :global(.dark) header-component.not-top .header-link:focus-visible,
   :global(.dark) header-component.not-top .header-icon-link:hover,
@@ -540,14 +537,13 @@ const currentPath = Astro.url.pathname
   :global(.dark) header-component.not-top .header-action:hover,
   :global(.dark) header-component.not-top .header-action:focus-visible {
     background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03)),
-      linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
-    border-color: rgba(255, 255, 255, 0.06);
+      linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+    border-color: rgba(255, 255, 255, 0.04);
     box-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.1) inset,
-      0 -1px 0 rgba(0, 0, 0, 0.24) inset,
-      0 12px 20px rgba(3, 5, 10, 0.28),
-      0 2px 0 rgba(255, 255, 255, 0.02);
+      0 1px 0 rgba(255, 255, 255, 0.08) inset,
+      0 -1px 0 rgba(0, 0, 0, 0.18) inset,
+      0 8px 16px rgba(3, 5, 10, 0.2);
   }
 
   :global(.dark) header-component.not-top {
