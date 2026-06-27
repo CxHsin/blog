@@ -105,7 +105,7 @@ export const integ: IntegrationUserConfig = {
       {
         date: '2026-04-27',
         content:
-          '一天添加三位友链：<a href="http://www.windchant.online/" target="_blank">YinFeng\'s Blog</a>、<a href="https://kyc001.github.io/" target="_blank">Crayon</a>、<a href="https://evanlin.site/" target="_blank">Evan Lin</a>。'
+          '一天添加三位友链：<a href="https://www.windchant.online/" target="_blank">YinFeng\'s Blog</a>、<a href="https://kyc001.github.io/" target="_blank">Crayon</a>、<a href="https://evanlin.site/" target="_blank">Evan Lin</a>。'
       },
       {
         date: '2026-04-28',
