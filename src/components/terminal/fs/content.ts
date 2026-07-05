@@ -12,8 +12,7 @@
 export const ROOT_LABEL = 'cxin.devserver'
 
 export const SOCIAL_LINKS: { label: string; href: string }[] = [
-  { label: 'github', href: 'https://github.com/CxHsin' },
-  { label: 'mail', href: 'mailto:cxin@example.com' }
+  { label: 'mail', href: 'mailto:cxhsin196@gmail.com' }
 ]
 
 export const README_TEXT = `cxin.devserver - a pseudo-FS over my published content.

@@ -457,14 +457,14 @@ export const commands: CommandRegistry = {
     name: 'mail',
     summary: 'send me an email',
     run: ({ push }) => {
-      const href = 'mailto:cxin@example.com?subject=hi%20cxin'
+      const href = 'mailto:cxhsin196@gmail.com?subject=hi%20cxin'
       push([
         { kind: 'text', tone: 'muted', text: 'opening your mail client…' },
         {
           kind: 'node',
           node: (
             <a className='wt-link' href={href}>
-              cxin@example.com
+              cxhsin196@gmail.com
             </a>
           )
         }

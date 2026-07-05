@@ -1,16 +1,140 @@
 ---
-import { Button, Card } from 'astro-pure/user'
+import type { iconsType } from 'astro-pure/types'
 import PageLayout from '@/layouts/CommonPage.astro'
+import ToolSection from '@/components/about/ToolSection.astro'
+import { Icon } from 'astro-pure/user'
 
 const headings = [
   { depth: 2, slug: 'intro', text: 'Introduction' },
-  { depth: 2, slug: 'focus', text: 'Focus' },
-  { depth: 2, slug: 'now', text: 'Now' }
+  { depth: 2, slug: 'hobbies', text: 'Hobbies' },
+  { depth: 2, slug: 'tools', text: 'Tools' },
+  { depth: 2, slug: 'social-networks', text: 'Social Networks' },
+  { depth: 2, slug: 'about-blog', text: 'About Blog' }
+]
+
+const toolSections = [
+  {
+    title: 'AI & Development',
+    tools: [
+      {
+        name: 'Cursor',
+        description: 'AI-native editor for building and refactoring faster.',
+        href: 'https://cursor.com/',
+        icon: import('@/assets/tools/cursor.svg?raw')
+      },
+      {
+        name: 'Claude',
+        description: 'Long-context thinking partner for code, writing, and research.',
+        href: 'https://claude.ai/',
+        icon: import('@/assets/tools/claude.svg?raw')
+      },
+      {
+        name: 'ChatGPT',
+        description: 'Daily assistant for prototypes, debugging, and idea shaping.',
+        href: 'https://chatgpt.com/',
+        icon: import('@/assets/tools/chatgpt.svg?raw')
+      },
+      {
+        name: 'OpenAI',
+        description: 'Models and APIs for agent workflows and product experiments.',
+        href: 'https://openai.com/',
+        icon: import('@/assets/tools/openai.svg?raw')
+      }
+    ]
+  },
+  {
+    title: 'Stack',
+    tools: [
+      {
+        name: 'Astro',
+        description: 'The framework behind this blog.',
+        href: 'https://astro.build/'
+      },
+      {
+        name: 'Bun',
+        description: 'Fast runtime and package manager for local development.',
+        href: 'https://bun.sh/',
+        icon: import('@/assets/tools/bun.svg?raw')
+      },
+      {
+        name: 'Git',
+        description: 'Version control and the habit of leaving a clean trail.',
+        href: 'https://git-scm.com/',
+        icon: import('@/assets/tools/git.svg?raw')
+      },
+      {
+        name: 'Docker',
+        description: 'Reproducible environments for services and deployment.',
+        href: 'https://www.docker.com/',
+        icon: import('@/assets/tools/docker.svg?raw')
+      }
+    ]
+  },
+  {
+    title: 'Productivity & Notes',
+    tools: [
+      {
+        name: 'Obsidian',
+        description: 'Local-first notes for ideas, reading, and project thinking.',
+        href: 'https://obsidian.md/',
+        icon: import('@/assets/tools/obsidian.svg?raw')
+      },
+      {
+        name: 'Notion',
+        description: 'Lightweight planning space for tasks and references.',
+        href: 'https://www.notion.so/',
+        icon: import('@/assets/tools/notion.svg?raw')
+      },
+      {
+        name: 'Figma',
+        description: 'Quick interface sketches before a feature becomes code.',
+        href: 'https://www.figma.com/',
+        icon: import('@/assets/tools/figma.svg?raw')
+      },
+      {
+        name: 'Vercel',
+        description: 'Hosting and preview deployments for web projects.',
+        href: 'https://vercel.com/',
+        icon: import('@/assets/tools/vercel.svg?raw')
+      }
+    ]
+  }
+]
+
+const socialItems: {
+  name: string
+  href?: string
+  icon: iconsType
+  stat: string
+}[] = [
+  {
+    name: 'GitHub',
+    href: 'https://github.com/CxHsin',
+    icon: 'github',
+    stat: '4 followers'
+  },
+  {
+    name: 'bilibili',
+    href: 'https://space.bilibili.com/3546560656837071',
+    icon: 'bilibili',
+    stat: '13 followers'
+  },
+  {
+    name: 'RedNote',
+    href: 'https://www.xiaohongshu.com/user/profile/6774d477000000001801fa98',
+    icon: 'link',
+    stat: '2 followers'
+  },
+  {
+    name: 'X',
+    icon: 'x',
+    stat: 'null'
+  }
 ]
 ---
 
 <PageLayout title='About' {headings} info='/about'>
-  <h2 id='intro'>AI Agent &amp; Full-Stack Developer</h2>
+  <h2 id='intro' class='text-xl font-semibold'>AI Agent &amp; Full-Stack Developer</h2>
   <p>
     本科在读，正在寻找 agent 相关实习，也持续把兴趣放在 AI 应用、Agent workflow 和全栈产品实现上。
     我喜欢把想法快速做成能运行的东西，再一边上线、一边打磨，把抽象概念变成真实可用的产品体验。
@@ -20,22 +144,88 @@ const headings = [
     use、retrieval 和 multi-agent collaboration；另一类是这些能力怎样真正落到产品里，变成用户愿意持续使用的功能，而不只是 demo。
   </p>
 
-  <h2 id='focus'>Focus</h2>
-  <Card heading='What I am working on' subheading='Build fast, learn faster.'>
-    <ul class='ms-4 list-disc text-muted-foreground'>
-      <li>AI Agent 产品原型与工作流设计</li>
-      <li>基于 LLM 的全栈应用开发与交互落地</li>
-      <li>从 prompt 到 memory、tool calling、multi-agent 的系统化理解</li>
-      <li>把研究兴趣转成真正能跑起来的产品与内容</li>
-    </ul>
-  </Card>
+  <p class='text-base font-medium text-foreground'>
+    <strong>Motto：</strong>Doing it even though it seems impossible - 知不可为而为之
+  </p>
 
-  <h2 id='now'>Now</h2>
+  <h2 id='hobbies'>Hobbies</h2>
+  <ul class='ms-4 list-disc space-y-3 text-muted-foreground marker:text-muted-foreground'>
+    <li>
+      <strong class='font-semibold text-foreground'>Kingdom Rush</strong> - 喜欢塔防里路线、节奏、升级取舍交织在一起的设计，也会从关卡里偷学一点产品节奏感。
+    </li>
+    <li>
+      <strong class='font-semibold text-foreground'>模型制作 Model Building</strong> - 享受把零散零件一点点搭成结构的过程，像是在现实世界里写一段可以摸到的代码。
+    </li>
+    <li>
+      <strong class='font-semibold text-foreground'>开源贡献 Open Source</strong> - 喜欢读优秀项目的实现方式，也希望把自己的小工具、笔记和实验慢慢沉淀成可复用的东西。
+    </li>
+  </ul>
+
+  <h2 id='tools'>Tools</h2>
   <p>
-    如果你也在做 agent、AI product 或者自动化方向的事情，欢迎联系我。无论是实习机会、项目合作，还是单纯交流想法，我都很愿意聊聊。
+    这些是我平时写代码、做 agent 原型、整理资料和维护这个博客时经常打开的工具。
+  </p>
+  <div class='not-prose flex flex-col gap-4'>
+    {toolSections.map((section) => <ToolSection title={section.title} tools={section.tools} />)}
+  </div>
+
+  <h2 id='social-networks'>Social Networks</h2>
+  <p>我常用的社交软件。</p>
+  <div class='not-prose grid grid-cols-1 gap-x-8 gap-y-1 rounded-xl border p-3 sm:grid-cols-2'>
+    {
+      socialItems.map((item) => (
+        <a
+          class='group text-muted-foreground no-underline'
+          href={item.href}
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          <div class='flex items-center gap-3 rounded-lg border border-transparent px-3 py-2 transition-all hover:border-border hover:bg-muted'>
+            <Icon name={item.icon} class='size-5 shrink-0 text-muted-foreground' />
+            <div class='min-w-0 flex-1 font-medium text-foreground transition-colors group-hover:text-primary'>
+              {item.name}
+            </div>
+            <div class='shrink-0 text-sm text-muted-foreground'>
+              {item.stat}
+            </div>
+          </div>
+        </a>
+      ))
+    }
+  </div>
+  <div class='not-prose mt-2 text-right text-sm text-muted-foreground'>
+    Display manually; powered by <a
+      class='text-muted-foreground'
+      href='https://github.com/spencerwooo/substats'
+      target='_blank'
+      rel='noopener noreferrer'>Substats</a
+    >
+  </div>
+
+  <h2 id='about-blog'>About Blog</h2>
+  <p>
+    这个博客是我的个人技术学习笔记和生活记录空间。主要记录 Agent 开发、LLM
+    原理、全栈开发相关的学习与实践，也会穿插一些项目复盘、求职思考和日常兴趣。
   </p>
   <p>
-    除了写代码，我平时也会弹琴、拍照，偶尔把做项目时想明白的一些东西写成文章留在博客里。
+    The smooth operation and personalized customization of this website rely on the following
+    excellent projects and service providers:
   </p>
-  <Button title='View contact page' class='w-fit' href='/contact' style='ahead' />
+  <ul>
+    <li>
+      Framework &amp; Theme: <a href='https://astro.build/' target='_blank'>Astro</a> + <a
+        href='https://github.com/cworld1/astro-theme-pure'
+        target='_blank'>Astro Theme Pure</a
+      >
+    </li>
+    <li>Site hosting: <a href='https://vercel.com/' target='_blank'>Vercel</a></li>
+    <li>Runtime &amp; package manager: <a href='https://bun.sh/' target='_blank'>Bun</a></li>
+    <li>Search: <a href='https://pagefind.app/' target='_blank'>Pagefind</a></li>
+    <li>
+      Source control: <a href='https://git-scm.com/' target='_blank'>Git</a> + <a
+        href='https://github.com/CxHsin'
+        target='_blank'>GitHub</a
+      >
+    </li>
+  </ul>
 </PageLayout>
