@@ -6,7 +6,6 @@ tags:
   - agent
   - coding-agent
   - harness
-  - mini-swe-agent
 type: note
 status: ready
 language: zh-CN
