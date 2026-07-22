@@ -1,11 +1,12 @@
+import { readdir } from 'node:fs/promises'
+import { resolve } from 'node:path'
 import type { CollectionEntry } from 'astro:content'
 import { getCollection, getEntry } from 'astro:content'
-import { getBlogCollection } from 'astro-pure/server'
-import { readdir } from 'node:fs/promises'
-import { fileURLToPath } from 'node:url'
 
-const blogDir = fileURLToPath(new URL('../content/blog', import.meta.url))
-const archiveDir = fileURLToPath(new URL('../content/archive', import.meta.url))
+import { getBlogCollection } from 'astro-pure/server'
+
+const blogDir = resolve('src/content/blog')
+const archiveDir = resolve('src/content/archive')
 
 const contentPresence = new Map<string, Promise<boolean>>()
 

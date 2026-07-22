@@ -1,14 +1,15 @@
 ---
 import { Image } from 'astro:assets'
+import { getSafeArchiveCollection } from '@/lib/content-guards'
 import avatar from 'src/assets/avatar.jpg'
 
 import { Quote } from 'astro-pure/advanced'
 import { Button, Card, Icon, Label } from 'astro-pure/user'
+import PageLayout from '@/layouts/BaseLayout.astro'
 import Section from '@/components/home/Section.astro'
 import SkillLayout from '@/components/home/SkillLayout.astro'
 import LoadingOverlay from '@/components/showcase/LoadingOverlay.astro'
 import Terminal from '@/components/terminal/Terminal.astro'
-import PageLayout from '@/layouts/BaseLayout.astro'
 import config from '@/site-config'
 
 export const prerender = true
@@ -16,8 +17,31 @@ export const prerender = true
 const languages = ['TypeScript', 'JavaScript', 'Python', 'SQL', 'C++']
 const frontend = ['React', 'Next.js', 'Astro', 'Tailwind CSS', 'UnoCSS']
 const backend = ['Node.js', 'Express', 'Supabase', 'PostgreSQL', 'Vercel']
-const ai = ['Codex', 'Claude Code', 'LLM', 'Transformer', 'Multi-Agent', 'RAG', 'Function Calling', 'Prompt Engineering']
+const ai = [
+  'Codex',
+  'Claude Code',
+  'LLM',
+  'Transformer',
+  'Multi-Agent',
+  'RAG',
+  'Function Calling',
+  'Prompt Engineering'
+]
 const tools = ['Cursor', 'Git', 'Docker', 'Bun', 'Figma', 'ESLint/Prettier']
+
+const archiveTypeLabels: Record<string, string> = {
+  note: '笔记',
+  snippet: '片段',
+  draft: '草稿',
+  idea: '想法',
+  research: '研究',
+  reference: '参考'
+}
+
+const latestNotes = (await getSafeArchiveCollection())
+  .filter((entry) => !entry.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 4)
 ---
 
 <PageLayout meta={{ title: 'Home' }} highlightColor='#659EB9'>
@@ -30,7 +54,10 @@ const tools = ['Cursor', 'Git', 'Docker', 'Bun', 'Figma', 'ESLint/Prettier']
   />
 
   <main class='flex w-full flex-col items-center'>
-    <section class='animate relative z-50 mb-12 flex flex-col items-center gap-y-6' id='content-header'>
+    <section
+      class='animate relative z-50 mb-12 flex flex-col items-center gap-y-6'
+      id='content-header'
+    >
       <Image
         src={avatar}
         alt='profile'
@@ -83,21 +110,42 @@ const tools = ['Cursor', 'Git', 'Docker', 'Bun', 'Figma', 'ESLint/Prettier']
       </Section>
 
       <Section title='Blog'>
-        <Card heading='Blank template' subheading='The original personal blog content has been removed.'>
+        <Card
+          heading='Blank template'
+          subheading='The original personal blog content has been removed.'
+        >
           <p class='text-muted-foreground'>You can add your own posts here later.</p>
         </Card>
         <Button title='Open page' class='w-fit self-end text-sm' href='/blog' style='ahead' />
       </Section>
 
       <Section title='Notes'>
-        <Card heading='Blank template' subheading='The original personal notes content has been removed.'>
-          <p class='text-muted-foreground'>You can add your own notes or drafts here later.</p>
-        </Card>
+        <ul class='flex flex-col gap-y-1.5 sm:gap-y-2'>
+          {
+            latestNotes.map((note) => (
+              <li class='group/card relative flex flex-col rounded-2xl border bg-background px-5 py-2.5 transition-colors ease-in-out hover:bg-muted'>
+                <a
+                  class='group/link flex w-full flex-col transition-all hover:text-primary sm:flex-row'
+                  href={`/archive/${note.id}`}
+                  data-astro-prefetch
+                >
+                  <span class='min-w-[95px] py-1 text-xs text-muted-foreground'>
+                    {archiveTypeLabels[note.data.type] || note.data.type}
+                  </span>
+                  <div class='z-10 flex-grow py-1'>{note.data.title}</div>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
         <Button title='Open page' class='w-fit self-end text-sm' href='/archive' style='ahead' />
       </Section>
 
       <Section title='Projects'>
-        <Card heading='Blank template' subheading='The original personal project content has been removed.'>
+        <Card
+          heading='Blank template'
+          subheading='The original personal project content has been removed.'
+        >
           <p class='text-muted-foreground'>You can add your own selected projects here later.</p>
         </Card>
         <Button title='Open page' class='w-fit self-end text-sm' href='/projects' style='ahead' />
@@ -106,7 +154,9 @@ const tools = ['Cursor', 'Git', 'Docker', 'Bun', 'Figma', 'ESLint/Prettier']
       <Section title='Education'>
         <div class='not-prose rounded-2xl border bg-muted px-6 py-5'>
           <div class='flex flex-col gap-y-1.5'>
-            <h3 class='w-fit text-lg font-medium text-foreground transition-colors hover:text-primary'>
+            <h3
+              class='w-fit text-lg font-medium text-foreground transition-colors hover:text-primary'
+            >
               武昌工学院
             </h3>
             <p class='text-muted-foreground'>计算机科学与技术</p>
