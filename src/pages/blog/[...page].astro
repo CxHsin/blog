@@ -1,28 +1,99 @@
 ---
-import type { GetStaticPaths } from 'astro'
-import { Button, Card } from 'astro-pure/user'
+import type { GetStaticPaths, Page } from 'astro'
+import type { CollectionEntry } from 'astro:content'
+import { getSafeBlogCollection } from '@/lib/content-guards'
+
+import { Paginator, PostPreview } from 'astro-pure/components/pages'
+import { getUniqueTags, sortMDByDate } from 'astro-pure/server'
+import { Button, Icon } from 'astro-pure/user'
 import PageLayout from '@/layouts/BaseLayout.astro'
+import config from '@/site-config'
 
 export const prerender = true
-export const getStaticPaths = (() => [{ params: { page: undefined } }]) satisfies GetStaticPaths
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = sortMDByDate(await getSafeBlogCollection()) as CollectionEntry<'blog'>[]
+  const uniqueTags = getUniqueTags(posts)
+
+  return paginate(posts, {
+    pageSize: config.content.blogPageSize,
+    props: { uniqueTags, postsCount: posts.length }
+  })
+}) satisfies GetStaticPaths
+
+interface Props {
+  page: Page<CollectionEntry<'blog'>>
+  uniqueTags: string[]
+  postsCount: number
+}
+
+const { page, uniqueTags, postsCount } = Astro.props
 
 const meta = {
-  description: 'Blog template page',
-  title: 'Blog'
+  description: '文章与长期整理的技术写作',
+  title: page.currentPage === 1 ? 'Blog' : `Blog - Page ${page.currentPage}`
+}
+
+const paginationProps = {
+  ...(page.url.prev && { prevUrl: { text: '← Previous Posts', url: page.url.prev } }),
+  ...(page.url.next && { nextUrl: { text: 'Next Posts →', url: page.url.next } })
 }
 ---
 
 <PageLayout {meta}>
   <Button title='Back' href='/' style='back' />
+
   <main class='mt-6 lg:mt-10'>
     <div id='content-header' class='animate'>
       <h1 class='mb-6 mt-6 text-3xl font-medium sm:mt-10'>Blog</h1>
     </div>
 
-    <section id='content' class='animate'>
-      <Card heading='Blank template' subheading='The original personal blog list has been removed.'>
-        <p class='text-muted-foreground'>Use this page later for your own posts, notes, announcements, or any writing archive you want to publish.</p>
-      </Card>
-    </section>
+    <div class='grid gap-y-16 sm:grid-cols-[3fr_1fr] sm:gap-x-8'>
+      <section aria-label='Blog posts list' class='animate' id='content'>
+        {
+          page.data.length > 0 ? (
+            <>
+              <div class='mb-3 flex flex-col justify-between text-sm sm:mb-5 sm:flex-row'>
+                <span class='text-muted-foreground'>
+                  Page {page.currentPage} · Showing {page.data.length} of {postsCount} posts
+                </span>
+                <a href='/archives' data-astro-prefetch>
+                  View all posts by years →
+                </a>
+              </div>
+              <ul class='flex flex-col gap-y-4 text-start'>
+                {page.data.map((post) => (
+                  <PostPreview {post} detailed />
+                ))}
+              </ul>
+              {page.lastPage > 1 && <Paginator {...paginationProps} />}
+            </>
+          ) : (
+            <p class='text-muted-foreground'>No posts yet.</p>
+          )
+        }
+      </section>
+
+      <aside class='animate' id='sidebar'>
+        <h2 class='mb-4 flex items-center text-lg font-semibold'>
+          <Icon name='tag-2' class='me-2' />
+          Tags
+        </h2>
+        {
+          uniqueTags.length > 0 ? (
+            <ul class='flex flex-wrap gap-2'>
+              {uniqueTags.map((tag) => (
+                <li>
+                  <Button title={tag} href={`/tags/${tag}`} style='pill' />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p class='text-sm text-muted-foreground'>No tags yet.</p>
+          )
+        }
+        <a class='mt-4 block sm:text-end' href='/tags' data-astro-prefetch> View all → </a>
+      </aside>
+    </div>
   </main>
 </PageLayout>
